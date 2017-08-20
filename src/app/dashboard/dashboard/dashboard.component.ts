@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FirebaseConnectionService } from '../../core/service/firebase.connection.service';
+import { ConnectionService } from '../../core/service/connection.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -8,15 +9,27 @@ import { FirebaseConnectionService } from '../../core/service/firebase.connectio
 })
 export class DashboardComponent implements OnInit {
 
-  public profilePic;
-  constructor( private firebaseCon: FirebaseConnectionService) {}
+  model: any = {};
+  loading = false;
+  public data = {};
+  constructor( 
+    private route: ActivatedRoute,
+    private router: Router,
+    private connectionService: ConnectionService) {}
 
   ngOnInit() {
-     // this.firebaseCon.downloadUrl('profile/profile.jpg').then(value => this.profilePic = value);
-     this.firebaseCon.downloadUrl('profile/profile.jpg').then((data) => {
-        this.profilePic = data;
-      }).catch((ex) => {
-        console.error('Error fetching this.profilePic ', ex);
+  }
+
+  login(){
+    this.loading = true;
+    this.connectionService.login(this.model.username, this.model.password)
+    .subscribe(
+      data => {
+          this.router.navigate(['/success']);
+      },
+      error => {
+          alert(error);
+          this.loading = false;
       });
   }
 }

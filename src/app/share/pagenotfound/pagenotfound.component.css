@@ -1,3 +1,8 @@
 div {
     color: #ff0000;
 }
+
+.wrapper{
+    height: 80px;
+    text-align: center;
+}

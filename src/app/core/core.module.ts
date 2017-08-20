@@ -1,16 +1,20 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NavComponent } from './nav/nav.component';
-import { FirebaseConnectionService } from './service/firebase.connection.service';
+import { ConnectionService } from './service/connection.service';
+import { mockUserProvider } from './service/mock-user';
 import { RouterModule } from '@angular/router';
+import { AuthGuard } from './guard/auth.guard';
+import { HttpModule, BaseRequestOptions } from '@angular/http';
+import { MockBackend, MockConnection } from '@angular/http/testing';
 
 @NgModule({
   imports: [
     CommonModule,
-    RouterModule
+    RouterModule,
+    HttpModule
   ],
-  declarations: [NavComponent],
-  exports: [NavComponent],
-  providers: [FirebaseConnectionService]
+  declarations: [],
+  exports: [],
+  providers: [ConnectionService, mockUserProvider, MockBackend, BaseRequestOptions, AuthGuard]
 })
 export class CoreModule { }

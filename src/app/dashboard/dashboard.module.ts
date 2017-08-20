@@ -2,12 +2,13 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { DashboardModuleRoute } from './dashboard.module.route';
-// import { FirebaseConnectionService } from '../core/service/firebase.connection.service';
+import { FormsModule }    from '@angular/forms';
 
 @NgModule({
   imports: [
     CommonModule,
-    DashboardModuleRoute
+    DashboardModuleRoute,
+    FormsModule
   ],
   declarations: [DashboardComponent]
 })
